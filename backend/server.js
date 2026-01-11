@@ -17,7 +17,7 @@ const app = express();
 
 app.use(cors({
   origin:["http://localhost:5173",// frontend url
-          "https://your-frontend.vercel.app"
+          "https://e-commerce-mini-website.vercel.app"
   ],
   credentials: true,// allow cookies if needed
 }));
