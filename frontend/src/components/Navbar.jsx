@@ -27,9 +27,11 @@ const Navbar = ({ setProducts , fetchAllProducts}) => {
 
   // Logout logic
   const handleLogout = async () => {
-    await fetch("http://localhost:5000/api/auth/logout", {
-      credentials: "include",
-    });
+    await fetch( `${import.meta.env.VITE_API_URL}/api/auth/logout`,
+       {
+        method:"POST", // IMPORT  for logout
+      credentials: "include", // keep session cookie
+    }); 
 
     setUser(null);
     navigate("/login");
@@ -41,7 +43,7 @@ const Navbar = ({ setProducts , fetchAllProducts}) => {
 
     try {
       const res = await fetch(
-        `http://localhost:5000/api/products?search=${query}`
+        `${import.meta.env.VITE_API_URL}/api/products?search=${query}`
       );
       const data = await res.json();
       setProducts(data);

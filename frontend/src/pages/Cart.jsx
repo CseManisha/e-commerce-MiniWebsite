@@ -10,7 +10,7 @@ const Cart = () => {
   const total = cart.reduce((sum, item) => sum + item.price, 0);
 
   const handleCheckout = async () => {
-    const res = await fetch("http://localhost:5000/api/auth/me", {
+    const res = await fetch( `${import.meta.env.VITE_API_URL}/api/auth/me`, {
       credentials: "include",   // check session
     });
 

@@ -8,7 +8,7 @@ export const AuthProvider = ({ children }) => {
 
   // check login on refresh
   useEffect(() => {
-    fetch("http://localhost:5000/api/auth/me", {
+    fetch( `${import.meta.env.VITE_API_URL}/api/auth/me`,{
       credentials: "include",
     })
       .then((res) => {
@@ -18,7 +18,7 @@ export const AuthProvider = ({ children }) => {
       .then((data) => setUser(data))
       .catch(() => setUser(null))
       .finally(() => setLoading(false));
-  }, []);
+  },[]);
 
   return (
     <AuthContext.Provider value={{ user, setUser, loading }}>
