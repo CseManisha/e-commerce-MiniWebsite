@@ -57,7 +57,10 @@ app.get('/', (req, res) => {
   res.send('Hello from Express backend!');
 });
 
-app.listen(5000,() =>{
-  console.log("server is running in port 5000");
+const PORT = process.env.PORT || 5000;
+
+app.listen(PORT, () => {
+  console.log(`server is running in port ${PORT}`);
 });
+
 
