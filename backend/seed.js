@@ -4,7 +4,7 @@ const Product = require("./models/product");
 const connectDB = require("./config/db");
 
 dotenv.config();
-connectDB();
+
 
 const sampleProducts = [
   {
@@ -152,9 +152,10 @@ const sampleProducts = [
 
 const importData = async () => {
   try {
+    await connectDB();
     await Product.deleteMany();
     await Product.insertMany(sampleProducts);
-    console.log("✅ 10 Sample products added successfully!");
+    console.log(" Sample products added successfully!");
     process.exit();
   } catch (error) {
     console.error(error);
