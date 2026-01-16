@@ -37,7 +37,7 @@ const Login = () => {
     console.log("Login success:", data);
 
 
-    const me = await fetch("http://localhost:5000/api/auth/me", {
+    const me = await fetch(`${import.meta.env.VITE_API_URL}/api/auth/me`, {
       credentials: 'include',
     });
 
