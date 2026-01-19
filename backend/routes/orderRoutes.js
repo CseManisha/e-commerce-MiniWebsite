@@ -1,10 +1,11 @@
 const express = require("express");
 const Order = require("../models/order");
+const isLoggedIn = require("../middleware/isLoggedIn")
 
 const router = express.Router();
 
 // ✅ CREATE A NEW ORDER
-router.post("/", async (req, res) => {
+router.post("/",isLoggedIn, async (req, res) => {
   try {
     const { user, products, totalPrice } = req.body;
 

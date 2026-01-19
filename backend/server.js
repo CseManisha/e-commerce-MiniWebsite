@@ -32,6 +32,11 @@ app.use(session({
   secret: "mysecretkey",
   resave:false,
   saveUninitialized:false,
+  //session
+  cookie: {
+      httpOnly: true,
+      sameSite:"lax", // 1 day important
+    },
 }))
 
 // initialize passport

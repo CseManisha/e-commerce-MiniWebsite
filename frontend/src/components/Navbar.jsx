@@ -17,7 +17,7 @@ import {
 
 
 
-const Navbar = ({ setProducts , fetchAllProducts}) => {
+const Navbar = ({ setProducts, fetchAllProducts }) => {
   const [isOpen, setIsOpen] = useState(false);
   const { user, setUser } = useAuth();
   const navigate = useNavigate();
@@ -27,11 +27,11 @@ const Navbar = ({ setProducts , fetchAllProducts}) => {
 
   // Logout logic
   const handleLogout = async () => {
-    await fetch( `${import.meta.env.VITE_API_URL}/api/auth/logout`,
-       {
-        method:"POST", // IMPORT  for logout
-      credentials: "include", // keep session cookie
-    }); 
+    await fetch(`${import.meta.env.VITE_API_URL}/api/auth/logout`,
+      {
+        method: "POST", // IMPORT  for logout
+        credentials: "include", // keep session cookie
+      });
 
     setUser(null);
     navigate("/login");
@@ -41,6 +41,11 @@ const Navbar = ({ setProducts , fetchAllProducts}) => {
   const handleSearch = async (e) => {
     e.preventDefault();
 
+    if (!query.trim()) {
+      fetchAllProducts();   // only reload when empty
+      navigate("/");
+      return;
+    }
     try {
       const res = await fetch(
         `${import.meta.env.VITE_API_URL}/api/products?search=${query}`
@@ -66,41 +71,38 @@ const Navbar = ({ setProducts , fetchAllProducts}) => {
             Hi, <b>{displayName}</b>
           </div>
         )}
-    
-    <form
-        onSubmit={handleSearch}
-        className="flex items-center bg-white rounded-full px-3 py-2 mx-3 w-full max-w-[180px] md:max-w-md"
-      >
-        <MagnifyingGlassIcon className="w-5 h-5 text-gray-400 mr-2" />
-        <input
-          type="text"
-          placeholder="Search products..."
-          value={query}
-          onChange={(e) => setQuery(e.target.value)}
-          className="w-full text-sm md:text-base outline-none"
-        />
-      </form>
 
-      {/* RIGHT: MENU / USER ICONS */}
-      <button
-        onClick={() => setIsOpen(!isOpen)}
-        className="text-white md:hidden"
-      >
-        <Bars3Icon className="w-7 h-7" />
-      </button>
-        
+        <form
+          onSubmit={handleSearch}
+          className="flex items-center bg-white rounded-full px-3 py-2 mx-3 w-full max-w-[180px] md:max-w-md"
+        >
+          <MagnifyingGlassIcon className="w-5 h-5 text-gray-400 mr-2" />
+          <input
+            type="text"
+            placeholder="Search products..."
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            className="w-full text-sm md:text-base outline-none"
+          />
+        </form>
 
-        
+        {/* RIGHT: MENU / USER ICONS */}
+        <button
+          onClick={() => setIsOpen(!isOpen)}
+          className="text-white md:hidden"
+        >
+          <Bars3Icon className="w-7 h-7" />
+        </button>
+
+
+
 
         {/* Desktop Menu */}
         <div className="hidden md:flex gap-8 items-center">
 
           <Link
             to="/"
-            onClick={()=>{
-              fetchAllProducts();
-              setIsOpen(false)
-            }}
+            onClick={() => setIsOpen(false)}
             className="flex items-center gap-1 text-white px-4 py-1 rounded-md hover:text-pink-200"
           >
             <HomeIcon className="h-4 w-4" />
@@ -166,7 +168,7 @@ const Navbar = ({ setProducts , fetchAllProducts}) => {
           className={`absolute right-4 top-14 bg-white text-pink-600 rounded-lg shadow-lg flex flex-col p-4 space-y-3 w-44 md:hidden transition-all duration-300 origin-top ${isOpen ? "opacity-100 scale-y-100" : "opacity-0 scale-y-0"
             }`}
         >
-         
+
 
           {user && (
             <div className="border-b pb-2 mb-2 text-sm font-medium">
@@ -178,10 +180,8 @@ const Navbar = ({ setProducts , fetchAllProducts}) => {
 
           <Link
             to="/"
-            onClick={()=>{
-              fetchAllProducts();
-              setIsOpen(false)
-            }}
+            onClick={() => setIsOpen(false)
+            }
             className="flex items-center gap-2 hover:text-pink-400"
           >
             <HomeIcon className="h-4 w-4" />

@@ -7,7 +7,7 @@ const Cart = () => {
   const { cart } = useCart();
   const navigate = useNavigate();
 
-  const total = cart.reduce((sum, item) => sum + item.price, 0);
+  const total = cart.reduce((sum, item) => sum + item.price * item.quantity,0);
 
   const handleCheckout = async () => {
     const res = await fetch( `${import.meta.env.VITE_API_URL}/api/auth/me`, {
