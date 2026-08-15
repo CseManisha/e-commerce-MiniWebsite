@@ -14,11 +14,11 @@ const Checkout = () => {
 
     
     try {
-      const res = await fetch(`${import.meta.env.VITE_API_URL}/api/products`, {
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/api/orders`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          user: user_id,
+          user: user._id,
           products: cart.map((item) => ({
             product: item._id,
             quantity: 1,
@@ -26,7 +26,7 @@ const Checkout = () => {
           totalPrice: total,
         }),
       });
-
+    
       
       if (!res.ok) {
         throw new Error("Failed to place order");

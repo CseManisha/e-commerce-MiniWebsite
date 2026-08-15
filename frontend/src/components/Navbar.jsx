@@ -63,7 +63,7 @@ const Navbar = ({ setProducts, fetchAllProducts }) => {
     <nav className="bg-pink-500 shadow-md fixed top-0 left-0 w-full z-50">
       <div className="max-w-6xl mx-auto px-4 py-3 flex justify-between items-center relative">
         {/* Logo */}
-        <h2 className="text-white text-2xl font-bold tracking-wide">MiniShop</h2>
+        <h2 className="text-white text-2xl font-bold tracking-wide"><span className="text-amber-300">Mini</span>Shop</h2>
 
         {user && (
           <div className="hidden md:flex items-center gap-1 text-white text-sm bg-pink-400/40 px-3 py-1 rounded-md">

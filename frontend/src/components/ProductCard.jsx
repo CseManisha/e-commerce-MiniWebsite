@@ -15,12 +15,12 @@ const ProductCard = ({ product }) => {
   };
 
   return (
-    <div className="bg-white shadow-lg rounded-2xl p-4 hover:shadow-xl transition-all duration-300 w-72">
+    <div className=" w-full bg-white shadow-lg rounded-2xl p-2 sm:p-4 hover:shadow-xl transition-all duration-300 ">
       {/* Product Image */}
       <img
         src={product.image}
         alt={product.name}
-        className="w-full h-48 object-cover rounded-lg mb-3"
+        className="w-full h-48 object-cover rounded-lg mb-3 bg-pink-300"
       />
 
       {/* Product Details */}
